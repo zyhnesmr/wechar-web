@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wechat.app.dao.DynamicsDao">
+
+    <resultMap type="com.wechat.app.entity.Dynamics" id="DynamicsMap">
+        <result property="user_id" column="user_id" jdbcType="VARCHAR"/>
+        <result property="nickname" column="nickname" jdbcType="VARCHAR"/>
+        <result property="content" column="content" jdbcType="VARCHAR"/>
+        <result property="create_time" column="create_time" jdbcType="VARCHAR"/>
+        <result property="user_profile" column="user_profile" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="queryAllDynamics" resultMap="DynamicsMap">
+        select user_id,nickname,content,create_time,user_profile
+        from dynamics
+    </select>
+
+    <select id="queryByUsername" resultMap="DynamicsMap">
+        select user_id,nickname,content,create_time,user_profile
+        from dynamics
+        where user_id = #{username}
+    </select>
+
+    <insert id="insertDynamics" useGeneratedKeys="true">
+        insert into dynamics(user_id,nickname,content,create_time,user_profile)
+        values(#{user_id},#{nickname},#{content},#{create_time},#{user_profile})
+    </insert>
+</mapper>
